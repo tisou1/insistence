@@ -1,0 +1,5 @@
+packages:
+  #package下的目录都为一个项目
+  - 'packages/**'
+  #排除测试目录
+  - '!**/test/**'
