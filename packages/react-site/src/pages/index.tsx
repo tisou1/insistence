@@ -29,6 +29,7 @@ function Index() {
       <section className='flex gap-3'>
         <Link to="/props" className='btn underline-transparent'>props</Link>
         <Link to="/state" className='btn underline-transparent'>state</Link>
+        <Link to="/event" className='btn underline-transparent'>event</Link>
       </section>
     </div>
   )
