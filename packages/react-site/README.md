@@ -1,8 +1,5 @@
 
 
-# react轻量开发
+# react官网示例
 
-
-## 特点
-- [react18](https://reactjs.org/),[vite](https://vitejs.dev/),[pnpm](https://pnpm.js.org/)
 
