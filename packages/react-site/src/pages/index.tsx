@@ -17,6 +17,7 @@ function Index() {
         <Link to="/event" className='btn underline-transparent'>event</Link>
         <Link to="/condition" className='btn underline-transparent'>condition</Link>
         <Link to="/list" className='btn underline-transparent'>list</Link>
+        <Link to="/form" className='btn underline-transparent'>form</Link>
       </section>
   )
 }
