@@ -21,6 +21,7 @@ importers:
       eslint: ^8.16.0
       eslint-plugin-react: ^7.30.0
       jsdom: ^19.0.0
+      nanoid: ^3.3.4
       pnpm: ^7.1.7
       react: ^18.1.0
       react-dom: ^18.1.0
@@ -32,6 +33,7 @@ importers:
       vitest: ^0.12.10
     dependencies:
       click-to-react-component: 1.0.8_4hkwgow5356cdmtz5c5vaxngqm
+      nanoid: 3.3.4
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-router-dom: 6.3.0_ef5jwxihqo6n7gxfmzogljlgcm
@@ -2240,7 +2242,6 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
