@@ -7,6 +7,28 @@ import './index.css'
 import 'uno.css'
 import Footer from './components/footer'
 
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from '@apollo/client'
+
+//init client
+const client = new ApolloClient({
+  // uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
+})
+
+// client
+// .query({
+//   query: gql`
+//   query GetRates {
+//     hello
+//   }
+//   `
+// }).then(res => console.log(res))
+
 const root = ReactDOM.createRoot(document.querySelector('#root')!)
 
 const App = () => {
@@ -20,9 +42,11 @@ const App = () => {
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-      {/* <ClickToComponent /> */}
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <App />
+        {/* <ClickToComponent /> */}
+      </Router>
+    </ApolloProvider>
   </React.StrictMode>
 )

@@ -21,6 +21,7 @@ function Index() {
         <Link to="/lifting" className='btn underline-transparent'>Lifting</Link>
         <Link to="/composition" className='btn underline-transparent'>composition</Link>
         <Link to="/thinking" className='btn underline-transparent'>thinking</Link>
+        <Link to="/graphql" className='btn underline-transparent'>graphql</Link>
 
 
       </section>
