@@ -11,7 +11,7 @@ function Index() {
       navigate(`/hello/${encodeURIComponent(value)}`)
   }
   return (
-      <section className='flex gap-3'>
+      <section className='grid gap-3 grid-cols-3 text-center'>
         <Link to="/props" className='btn underline-transparent'>props</Link>
         <Link to="/state" className='btn underline-transparent'>state</Link>
         <Link to="/event" className='btn underline-transparent'>event</Link>
@@ -20,6 +20,8 @@ function Index() {
         <Link to="/form" className='btn underline-transparent'>form</Link>
         <Link to="/lifting" className='btn underline-transparent'>Lifting</Link>
         <Link to="/composition" className='btn underline-transparent'>composition</Link>
+        <Link to="/thinking" className='btn underline-transparent'>thinking</Link>
+
 
       </section>
   )
