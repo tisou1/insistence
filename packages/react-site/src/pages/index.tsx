@@ -17,6 +17,7 @@ const CORE_LINKS = [
 
 const ADVANCED_LINKS = [
   { to:'/advanced/context', title: 'context'},
+  { to:'/advanced/errorBoundaries', title: 'ErrorBoundaries'},
 
 ]
 
