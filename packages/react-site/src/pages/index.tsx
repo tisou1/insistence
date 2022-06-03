@@ -15,6 +15,11 @@ const CORE_LINKS = [
   { to:'/core/thinking', title: 'thinking'},
 ]
 
+const ADVANCED_LINKS = [
+  { to:'/advanced/context', title: 'context'},
+
+]
+
 const GRAPHQL_LINKS = [
   { to:'/graphql/query', title: 'query'},
 ]
@@ -29,12 +34,20 @@ function Index() {
   }
   return (
       <main className=''>
-        <WrapContainer title='Core'>
+        <WrapContainer title='Core(Main concepts)'>
           {
             CORE_LINKS.map(({ to, title }) => (
               <Link key={to} to={to} className='btn underline-transparent'>{title}</Link>
             ))
           }
+        </WrapContainer>
+
+        <WrapContainer title='高级指引(Advanced guids)'>
+         {
+            ADVANCED_LINKS.map(({ to, title }) => (
+              <Link key={to} to={to} className='btn underline-transparent'>{title}</Link>
+            ))
+         }
         </WrapContainer>
 
         <WrapContainer title='Graphql'>
