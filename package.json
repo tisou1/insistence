@@ -11,9 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "pnpm": "^7.1.7",
+    "unocss": "^0.33.5",
+    "vite": "^2.9.9",
     "vitest": "^0.13.0"
-  },
-  "dependencies": {
-    "vite": "^2.9.9"
   }
 }
