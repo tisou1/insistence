@@ -33,7 +33,7 @@ const root = ReactDOM.createRoot(document.querySelector('#root')!)
 
 const App = () => {
   return (
-    <Suspense>
+    <Suspense fallback={<div style={{color: 'red'}}>Loading...</div>}>
       {useRoutes(routes)}
       <Footer />
     </Suspense>
