@@ -19,6 +19,8 @@ const ADVANCED_LINKS = [
   { to:'/advanced/context', title: 'context'},
   { to:'/advanced/errorBoundaries', title: 'ErrorBoundaries'},
   { to:'/advanced/refs', title: 'refs'},
+  { to:'/advanced/hoc', title: 'hoc'},
+
 ]
 
 const GRAPHQL_LINKS = [
