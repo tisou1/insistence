@@ -4,10 +4,19 @@ import {
   gql
 } from '@apollo/client'
 
+// const EXCHANGE_RATES = gql`
+// query info {
+//   hello
+// }
+// `
+
 const EXCHANGE_RATES = gql`
-query info {
-  hello
-}
+ query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
 `
 
 export default function GraphqlC() {
@@ -16,7 +25,11 @@ export default function GraphqlC() {
   if(error) return <p>Error...</p>
 
   console.log(data);
+
+
   return (
-    <div>{data.hello}</div>
+    <div>
+     asd
+    </div>
   )
 }

@@ -15,8 +15,9 @@ import {
 
 //init client
 const client = new ApolloClient({
-  // uri: 'https://48p1r2roz4.sse.codesandbox.io',
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  // uri: 'http://localhost:4000/graphql',
+  // uri: 'http://localhost:8080/query',
   cache: new InMemoryCache(),
 })
 
