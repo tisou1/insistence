@@ -76,10 +76,6 @@ export default function Todolist() {
     setList([...list.slice(0,idx), ...list.slice(idx + 1)])
   }
 
-  const DelContext = React.createContext({
-    onDelete
-  })
-
   const onChange = (value: string) => {
     setList([...list, { name: `${value}`, id: `${count++}` }])
   }
