@@ -10,12 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "pnpm": "^7.1.8",
+    "pnpm": "^7.2.1",
     "unocss": "^0.33.5",
-    "vite": "^2.9.9",
+    "vite": "^2.9.12",
     "vitest": "^0.13.1"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "nanoid": "^4.0.0"
   }
 }

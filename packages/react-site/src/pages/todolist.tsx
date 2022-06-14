@@ -49,7 +49,7 @@ export default function Todolist() {
   const [list, setList] = useState<Item[]>([])
 
   const onChange = (value: string) => {
-    setList([...list, { name: `${value}`, id: nanoid() }])
+    // setList([...list, { name: `${value}`, id: nanoid() }])
     // console.log(value);
   }
 
