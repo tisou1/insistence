@@ -24,7 +24,9 @@ const ADVANCED_LINKS = [
 ]
 
 const GRAPHQL_LINKS = [
-  { to:'/graphql', title: 'query'},
+  { to:'/graphql', title: 'graphql'},
+  { to:'/todolist', title: 'todolist'},
+
 ]
 
 function Index() {
