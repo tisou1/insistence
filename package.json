@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@iconify-json/carbon": "^1.1.5",
     "pnpm": "^7.2.1",
     "unocss": "^0.33.5",
     "vite": "^2.9.12",

@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@iconify-json/carbon': ^1.1.5
       axios: ^0.27.2
       nanoid: ^4.0.0
       pnpm: ^7.2.1
@@ -14,6 +15,7 @@ importers:
       axios: 0.27.2
       nanoid: 4.0.0
     devDependencies:
+      '@iconify-json/carbon': 1.1.5
       pnpm: 7.2.1
       unocss: 0.33.5_vite@2.9.12
       vite: 2.9.12
