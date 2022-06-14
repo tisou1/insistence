@@ -24,7 +24,7 @@ const onDelete = (idx: number) => {
 </script>
 
 <template>
-  <div className='flex justify-center flex-col max-w-500px mx-auto'>
+  <div class='flex justify-center flex-col max-w-500px mx-auto'>
       <InputValue @onClick='onChange' />
       <MyList :list='list' @onDelete='onDelete' />
   </div>
