@@ -1,8 +1,10 @@
 
+import Todolist from "./todolist";
+
 function App() {
   return (
     <div class=''>
-      app
+     <Todolist />
     </div>
   );
 }
