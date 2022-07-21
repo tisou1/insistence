@@ -5,7 +5,7 @@ import myPlugin from './plugins'
 
 export default defineConfig({
   plugins: [
-    myPlugin()
+    myPlugin() as any
   ],
 
 })
