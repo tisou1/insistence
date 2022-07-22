@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>打开</button>
+  <script>
+    const btn = document.querySelector('button');
+    btn.addEventListener('click',() => displatMessage('你好函数', 0))
+
+    function displatMessage(msgText = '暂无更多消息', msgType = 1) {
+      const html = document.querySelector('html');
+
+      const panel = document.createElement('div');
+      // panel.classList.add('panel');
+      panel.setAttribute('class', 'msgBox');
+      html.appendChild(panel)
+
+      const msg = document.createElement('p');
+      msg.textContent =  msgText
+      panel.appendChild(msg)
+
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = 'Close';
+      panel.appendChild(closeBtn);
+
+      closeBtn.addEventListener('click', () => {
+        panel.parentNode.removeChild(panel)
+      });
+    }
+
+
+    function randomNumber (number = 255) {
+      return Math.floor(Math.random() * number) + 1
+    }
+    function generateColor() {
+      return `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`
+    }
+  </script>
+</body>
+</html>
