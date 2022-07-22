@@ -36,3 +36,42 @@
 ### load和DOMContentLoaded
 - DOMContentLoaded —— 浏览器已完全加载 HTML，并构建了 DOM 树，但像 <img> 和样式表之类的外部资源可能尚未加载完成。
 - load —— 浏览器不仅加载完成了 HTML，还加载完成了所有外部资源：图片，样式等。
+
+### let和var的区别
+
+- var有变量提升,let没有,let会存在暂时性死区(TDZ)
+- var可以多次声明同一个变量,二let不行
+- let声明的变量是有块级作用域的
+
+### 变量类型
+**原始值(基础类型)**
+- Number
+- String
+- Boolean
+- Bigint
+- Symbol
+- null
+- undefined  
+--------------------
+**对象类型**
+  - Object
+  - function
+  - Array
+  - Date
+  - Error
+  - Regex
+  - Set WeakSet
+  - map WeakMap
+
+### 数据类型的判断
+- typeof
+  使用typeof来判断基本类型,同时也可以判断是不是Function类型
+- instanceof
+  用来判断对象的具体类型时,判断操作符左边对象的原型链上是否有右边这个构造函数的prototype属性(指定对象是否是某个构造函数的实例)
+
+- constructor
+  判断对象的构造函数
+- Object.prototype.toString.call()
+  几乎所有类型皆可判断
+
+

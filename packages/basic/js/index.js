@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
   console.log('文档加载完成......')
   console.log('代码执行......')
 
@@ -84,5 +83,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   console.log('代码执行结束......')
-
-})
