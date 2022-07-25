@@ -90,3 +90,14 @@ const getAge = () => {...}
 
 ## JS对象
 
+### 异步javascript
+异步函数总是返回一个promise
+```js
+  async function getName() {
+  let name = await 'name'
+  return name
+}
+
+console.log(getName()) //Promise { <pending>}
+getName().then(res => console.log(res)) //'name'
+```
