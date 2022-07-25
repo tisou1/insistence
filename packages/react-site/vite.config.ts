@@ -18,7 +18,9 @@ export default defineConfig({
   plugins: [
     react(),
     Unocss(),
-    Pages(),
+    Pages({
+      exclude: ['**/components/*.[tj]sx']
+    }),
   ],
   test: {
     environment: 'jsdom',
