@@ -84,6 +84,9 @@ function getName() {...}
 const getAge = () => {...}
 ```
   函数声明会进行声明提升,而函数表达式不会
+ 
 
 
+
+## JS对象
 
