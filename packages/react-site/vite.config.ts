@@ -19,7 +19,7 @@ export default defineConfig({
     react(),
     Unocss(),
     Pages({
-      exclude: ['**/components/*.[tj]sx']
+      exclude: ['**/components/*.[tj]sx', "**/graphql/"]
     }),
   ],
   test: {

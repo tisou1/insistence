@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "nanoid": "^4.0.0"
+    "nanoid": "^3.3.4"
   }
 }

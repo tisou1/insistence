@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.css'
 import Todo from './components/Todo'
 import Form from './components/Form'
 import FilterButton from './components/FilterButton'
 
+import { nanoid } from 'nanoid'
+
+export interface Task {
+  id: string
+  name: string
+  completed: boolean
+} 
+
 export default function App(props: any) {
+  const [tasks,setTasks] = useState<Task[]>([])
 
   const DATA = [
     { id: "todo-0", name: "Eat", completed: true },
@@ -13,15 +22,36 @@ export default function App(props: any) {
   ];
 
 
+  const addTask = (name: any) => {
+  const newTask = {
+    id: 'id' + nanoid(),
+    name: name,
+    completed: false
+  }
+  setTasks([...tasks, newTask]) 
+  }
+
+
+  const taskList = tasks.map(task => {
+    <Todo
+      key={task.id}
+      id={task.id}
+      name={task.name}
+      completed={task.completed}
+    />
+  })
+
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task' 
+  const headingTest = `${taskList.length} ${tasksNoun} remaining`
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-      <Form />
+      <Form addTask={addTask}/>
       <div className="filters btn-group stack-exception">
         <FilterButton />
       </div>
       <h2 id="list-heading">
-        3 tasks remaining
+       { headingTest }
       </h2>
       <ul
         role="list"
