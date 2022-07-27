@@ -4,14 +4,14 @@ import Todo from './components/Todo'
 import Form from './components/Form'
 import FilterButton from './components/FilterButton'
 
-import { nanoid } from 'nanoid'
+// import { nanoid } from 'nanoid'
 
 export interface Task {
   id: string
   name: string
   completed: boolean
 } 
-
+let count = 1
 export default function App(props: any) {
   const [tasks,setTasks] = useState<Task[]>([])
 
@@ -24,22 +24,41 @@ export default function App(props: any) {
 
   const addTask = (name: any) => {
   const newTask = {
-    id: 'id' + nanoid(),
+    id: 'id' + (count++),
     name: name,
     completed: false
   }
   setTasks([...tasks, newTask]) 
   }
 
+  const deleteTask = (id: string) => {
+    const remainingTasks = tasks.filter(task => id !== task.id)
+    setTasks(remainingTasks)
+  }
 
-  const taskList = tasks.map(task => {
+  const toggleTaskCompleted = (id: any) => {
+    console.log(tasks[0]);
+    const updatedTasks = tasks.map(task => {
+      if(id === task.id) {
+        return {...task, completed: !task.completed}
+      }
+
+      return task
+    })
+
+    setTasks(updatedTasks)
+  }
+
+  const taskList = tasks.map(task => (
     <Todo
       key={task.id}
       id={task.id}
       name={task.name}
       completed={task.completed}
+      toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
     />
-  })
+  ))
 
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task' 
   const headingTest = `${taskList.length} ${tasksNoun} remaining`
@@ -58,12 +77,15 @@ export default function App(props: any) {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-
         {
+          taskList
+        }
+        {/* {
           DATA.map(item => (
             <Todo key={item.id} name={item.name} completed={item.completed} id={item.id}/>
           ))
-        }
+        } */}
+        
       </ul>
     </div>
   );
