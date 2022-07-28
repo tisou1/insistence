@@ -14,6 +14,7 @@ export interface Task {
 let count = 1
 export default function App(props: any) {
   const [tasks,setTasks] = useState<Task[]>([])
+  const [filter, setFilter] = useState<'All' | 'Active' | 'Complete'>("All");
 
   const DATA = [
     { id: "todo-0", name: "Eat", completed: true },
@@ -49,7 +50,42 @@ export default function App(props: any) {
     setTasks(updatedTasks)
   }
 
-  const taskList = tasks.map(task => (
+  const editTasks = (id: string, newName: string) => {
+    const editTaskList = tasks.map(task => {
+      if(id === task.id) {
+        return { ...task, name: newName}
+      }
+
+      return task
+    })
+
+    setTasks(editTaskList)
+  }
+
+
+  const FILTER_MAP: {
+    All: () => boolean
+    Active: (...args: unknown[]) => boolean
+    Complete: (...args: unknown[]) => boolean
+  } = {
+    All: () => true,
+    Active: (task: any) => !task.completed,
+    Complete: (task: any) => task.completed
+  }
+
+  const FILTER_NAMES = Object.keys(FILTER_MAP);
+  const filterList = FILTER_NAMES.map(name => {
+    return <FilterButton 
+            name={name} 
+            key={name}
+            isPressed={name === filter}
+            setFilter={setFilter}
+            />
+  })
+
+  const taskList = tasks
+  .filter(FILTER_MAP[filter])
+  . map(task => (
     <Todo
       key={task.id}
       id={task.id}
@@ -57,6 +93,7 @@ export default function App(props: any) {
       completed={task.completed}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      editTasks={editTasks}
     />
   ))
 
@@ -67,7 +104,7 @@ export default function App(props: any) {
       <h1>TodoMatic</h1>
       <Form addTask={addTask}/>
       <div className="filters btn-group stack-exception">
-        <FilterButton />
+       {filterList}
       </div>
       <h2 id="list-heading">
        { headingTest }
