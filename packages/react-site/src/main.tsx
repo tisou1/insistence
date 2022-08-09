@@ -6,6 +6,9 @@ import routes from '~react-pages'
 import './index.css'
 import 'uno.css'
 import Footer from './components/footer'
+import { log } from 'utils'
+
+log()
 
 import {
   ApolloClient,
