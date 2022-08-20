@@ -19,7 +19,14 @@ describe('测试手写函数', () => {
     // expect(mock).toHaveBeenCalledTimes(1)
     vi.advanceTimersToNextTimer()
     expect(mock).toHaveBeenCalledTimes(1)
+    
     vi.advanceTimersToNextTimer()
-    expect(mock).toHaveBeenCalledTimes(2)
+    expect(mock).toHaveBeenCalledTimes(1)
+        
+    vi.advanceTimersToNextTimer()
+    expect(mock).toHaveBeenCalledTimes(1)
+        
+    vi.advanceTimersToNextTimer()
+    expect(mock).toHaveBeenCalledTimes(1)
   })
 })
