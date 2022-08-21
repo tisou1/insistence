@@ -1,6 +1,13 @@
 import { afterEach } from "vitest";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { debounce, unique, unique2, reduce } from '../index'
+import {
+  debounce,
+  unique,
+  unique2,
+  reduce,
+  sortArray
+}
+  from '../index'
 
 const mock = vi.fn(() => console.log('executed'))
 
@@ -37,5 +44,11 @@ describe('测试手写函数', () => {
   })
 
 
-  //
+  //快速排序
+  it('快速排序', () => {
+    let arr = [1, 2, 1, 3, 4, 3, 2, 1, 5]
+    const expectArr = [1, 1, 1, 2, 2, 3, 3, 4, 5]
+
+    expect(sortArray(arr)).toEqual(expectArr)
+  })
 })
