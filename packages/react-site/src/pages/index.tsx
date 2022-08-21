@@ -27,6 +27,8 @@ const GRAPHQL_LINKS = [
   { to:'/graphql', title: 'graphql'},
   { to:'/todolist', title: 'todolist'},
   { to: '/mdntodoList', title: 'mdnTodoList'},
+  { to: '/redux', title: 'redux'},
+
 
 ]
 
