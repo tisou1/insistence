@@ -100,11 +100,6 @@ export default function createStore(reducer, preloadedState, enhancer) {
     return action
   }
 
-
-
-
-
-
   return {
     dispatch,
     subscribe,
