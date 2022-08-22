@@ -1,6 +1,5 @@
 import React from 'react'
-import createStore from './redux'
-import applyMiddleware from './applyMiddleware'
+import { createStore, applyMiddleware } from 'redux-l'
 
 function logger({ getState }: any) {
   //next就相当于dispatch, applyMiddleware中最左边的函数的next就是原始的dispatch
