@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStore, applyMiddleware } from 'redux-l'
+import { createStore, applyMiddleware, thunk } from 'redux-l'
 
 function logger({ getState }: any) {
   //next就相当于dispatch, applyMiddleware中最左边的函数的next就是原始的dispatch
@@ -37,7 +37,7 @@ function logger2({ getState }: any) {
 
 
 
-const store = createStore(reducer, 0, applyMiddleware(logger, logger2))
+const store = createStore(reducer, 0, applyMiddleware(thunk, logger, logger2))
 
 function reducer(state: any, action: any) {
   switch(action.type){
@@ -52,8 +52,25 @@ store.subscribe(() => {
 })
 
 export default function Index() {
-  
+
+  const addCount = ()=> {
+    return { type: '+' }
+  }
+
+  const handleClick = () => {
+    return dispatch => {
+      console.log(dispatch)
+      setTimeout(() => {
+        console.log('first')
+
+        dispatch(addCount())
+      },2000)
+    }
+  }
   return (
-    <div onClick={() => store.dispatch({type:'+'})}>Index</div>
+   <>
+      <div onClick={() => store.dispatch({type:'+'})}>同步</div>
+      <div onClick={() => store.dispatch(handleClick())}>异步</div>
+    </>
   )
 }
