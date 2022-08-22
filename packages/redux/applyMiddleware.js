@@ -22,6 +22,8 @@ export default function appliMiddleware(...middlewares) {
      *chain = [c1, c2, c3] 经过compose(...chain)
    *  变为c1(c2(c3(store.dispatch)))
    * 这时候外面使用的dispatch就是包装后的dispatch, 类似koa的洋葱模型
+   * 
+   * 参考链接 https://www.cnblogs.com/link-x/p/12008043.html
      */
     dispatch = compose(...chain)(store.dispatch)
 
