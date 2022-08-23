@@ -28,8 +28,7 @@ const GRAPHQL_LINKS = [
   { to:'/todolist', title: 'todolist'},
   { to: '/mdntodoList', title: 'mdnTodoList'},
   { to: '/redux', title: 'redux'},
-
-
+  { to:'/xingneng', title: '性能优化'}
 ]
 
 function Index() {
