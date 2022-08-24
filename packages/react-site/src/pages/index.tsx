@@ -57,7 +57,7 @@ function Index() {
          }
         </WrapContainer>
 
-        <WrapContainer title='Graphql'>
+        <WrapContainer title='explore(探索)'>
          {
             GRAPHQL_LINKS.map(({ to, title }) => (
               <Link key={to} to={to} className='btn underline-transparent'>{title}</Link>
