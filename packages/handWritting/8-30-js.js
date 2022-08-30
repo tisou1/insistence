@@ -217,3 +217,87 @@ Function.prototype.bind = function(ctx, ...args) {
 
   return bind
 }
+
+
+//new
+
+function myNew(fn, ...args) {
+  if(typeof fn !== 'function') {
+    throw new TypeError(`${fn.name} is not a function`)
+  }
+
+  const newObj = Object.create(fn.prototype)
+
+  const result = fn.apply(newObj, args)
+
+  return (typeof result === 'object' && result !== null) ? result : newObj
+}
+
+
+//函数科里化
+function curry(fn, ...args) {
+
+  //返回一个新的函数
+  let curried = function(...args2) {
+    let allArgs = [...args, ...args2]
+    return curry(fn, ...allArgs)
+  }
+
+  //利用toString隐式转换的特性, 当最后执行函数时,会隐式转换
+  curried.toString = function() {
+    return fn(...args)
+  }
+
+  return curried
+}
+
+function add(...args) {
+  return args.reduce((pre, cur) => pre + cur, 0)
+}
+
+let addCurry = curry(add)
+
+console.log(addCurry(1)(2,3) == 6)  //这时候会进行隐式调用toString()
+
+
+
+//深浅拷贝
+/**
+ * Object.assign() 
+ * 展开运算符
+ */
+
+export function isObject(obj) {
+  return typeof obj === 'object' && obj !== null
+}
+
+function shallowClone(obj) {
+  if(!isObject(obj)) return obj
+  let newObj = Array.isArray(obj) ? [] : {}
+
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      newObj[key] = obj[key];
+    }
+  }
+
+  return newObj
+}
+
+
+//hash作为一个检查器, 避免对象拷贝中出现循环引用
+function deepClone(obj, hash = new WeakMap()) {
+  if(!isObject(obj)) return obj
+  //检查是否存在相同的对象在之前的拷贝中
+  if(hash.has(obj)) return hash.get(obj)
+
+  let newObj = Array.isArray(obj) ? [] : {}
+  //设置备份在hash中,
+  hash.set(obj, newObj)
+  //返回对象自身的所有键,包括symbol键
+  Reflect.ownKeys(obj).forEach(key => {
+    newObj[key] = isObject(obj[key]) ? deepClone(obj[key], hash) : obj[key]
+  })
+
+  return newObj
+}
