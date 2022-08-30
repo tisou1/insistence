@@ -301,3 +301,36 @@ function deepClone(obj, hash = new WeakMap()) {
 
   return newObj
 }
+
+
+Object.myAssign = function(target, ...source) {
+  if(target === null) {
+    throw new TypeError('Cannot convert undefined or null to object');
+  }
+
+  let res = Object(target)
+  source.forEach((obj) => {
+    if(obj !== null) {
+      for (const key in obj) {
+        if (Object.hasOwnProperty.call(obj, key)) {
+          res[key] = obj[key];
+        }
+      }
+    }
+  })
+
+  return res
+}
+
+Object.myIs = (x, y) => {
+  if(x === y) {
+    //+0和-0
+    //如果x不等于0,直接返回true
+    //如果 x === 0，则需要判断+0和-0，则可以直接使用 1/+0 === Infinity 和 1/-0 === -Infinity来进行判断
+    return x !== 0 || 1/x === 1/y
+  }
+
+  //如果x !== x说明x是NaN
+  //x,y同时为NaN返回true
+  return x !== x && y !== y
+}
