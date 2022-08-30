@@ -9,8 +9,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "210306_tools": "^1.0.1"
-  }
+  "license": "ISC"
 }

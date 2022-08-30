@@ -189,3 +189,31 @@ export function findIndex(array, cb) {
   }
   return -1
 }
+
+
+Function.prototype.myCall = function (ctx, ...args) {
+  ctx = ctx || window
+
+  let fn = Symbol()
+  ctx[fn] = this
+  //将函数当做ctx(上下文)的方法调用
+  let result = ctx[fn](...args)
+  //最后再删除该方法
+  delete ctx[fn]
+
+  return result
+}
+
+Function.prototype.myApply = function(ctx, args) {
+  return this.myCall(ctx, ...args)
+}
+
+Function.prototype.bind = function(ctx, ...args) {
+  let that = this
+
+  const bind = function(){
+    return that.call(this instanceof bind ? this : ctx, ...args)
+  }
+
+  return bind
+}

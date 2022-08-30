@@ -25,10 +25,7 @@ importers:
     specifiers: {}
 
   packages/handWritting:
-    specifiers:
-      210306_tools: ^1.0.1
-    devDependencies:
-      210306_tools: 1.0.1
+    specifiers: {}
 
   packages/preact-l:
     specifiers:
@@ -143,10 +140,6 @@ importers:
       vue-tsc: 0.34.17_typescript@4.7.4
 
 packages:
-
-  /210306_tools/1.0.1:
-    resolution: {integrity: sha512-J1isXqhGLtsTV0ugfV0W7wQ0hXK2ADOO2RRve89J/Zqqv7Fx65Rduff8PIdL8a1ybUq/V5KUUwRRg9imeUUqvg==}
-    dev: true
 
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}
