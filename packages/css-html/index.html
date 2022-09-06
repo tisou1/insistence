@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .parent{
+      width: 500px;
+      background: #000;
+    }
+    .parent::after{
+      display: block;
+      content: '';
+      clear: both;
+    }
+    
+    .child{
+      width: 200px;
+      height: 200px;
+    }
+    .left{
+      float: left;
+      background-color: red;
+    }
+    .right{
+      float: right;
+      background-color: gold;
+    }
+  </style>
+</head>
+<body>
+  <main class="parent">
+    <div class="child left" >1</div>
+    <div class="child right" >1</div>
+  </main>
+</body>
+</html>

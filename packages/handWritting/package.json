@@ -1,13 +1,17 @@
 {
-  "name": "handWritting",
+  "name": "handwritting",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "test:u": "vitest -u"
+    "test:u": "vitest -u",
+    "tp": "promises-aplus-tests promise.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  }
 }
