@@ -30,6 +30,28 @@ promise.then(value => {
 })
 
 
+
+function digitalRoot(n) {
+  // ...
+  //将数字转为字符串
+  let nStr = n.toString().split('')
+  return +sum(nStr)[0]
+}
+
+
+function sum(n) {
+  if(n.length > 1) {
+    let r = 0
+    n.forEach(v =>{
+      r += +v
+    })
+  return  sum(r.toString().split(''))
+  } else {
+    return n
+  }
+}
+
+console.log(digitalRoot(7))
   </script>
 </body>
 </html>
