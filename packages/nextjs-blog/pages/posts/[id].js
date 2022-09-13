@@ -36,6 +36,7 @@ export async function getStaticPaths() {
   return {
     paths,
     fallback: false
+    //如果访问不在预渲染中的路径 直接返回404
   }
 }
 
