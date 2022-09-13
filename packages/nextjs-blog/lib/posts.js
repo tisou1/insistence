@@ -1,6 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import html from 'remark-html'
+import { remark } from 'remark'
+
 
 //process.cwd() 返回node.js进程的当前工作目录
 const postsDirectory = path.join(process.cwd(), 'posts')
@@ -50,14 +53,22 @@ export function getAllPostIds() {
   })
 }
 
-export function getPostData(id) {
+export async function getPostData(id) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContext = fs.readFileSync(fullPath, 'utf8')
 
   const matterResult = matter(fileContext)
 
+  //使用remark解析md文件
+  const processedContent = await remark()
+      .use(html)
+      .process(matterResult.content)
+
+  const contentHtml = processedContent.toString()
+
   return {
     id,
+    contentHtml,
     ...matterResult.data
   }
 }
