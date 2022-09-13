@@ -37,3 +37,27 @@ export function getSortedPostsData() {
     }
   })
 }
+
+export function getAllPostIds() {
+  const fileNames = fs.readdirSync(postsDirectory)
+
+  return fileNames.map(fileName => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    }
+  })
+}
+
+export function getPostData(id) {
+  const fullPath = path.join(postsDirectory, `${id}.md`)
+  const fileContext = fs.readFileSync(fullPath, 'utf8')
+
+  const matterResult = matter(fileContext)
+
+  return {
+    id,
+    ...matterResult.data
+  }
+}
