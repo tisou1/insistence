@@ -1,7 +1,7 @@
 ## pnpm管理的monorepo
 ### todo list
-- react
-- preact
-- vue
-- svelte
-- solid
+- [React](https://reactjs.org/)
+- [Preact](https://preactjs.com/)
+- [Vue](https://cn.vuejs.org/)
+- [Svelte](https://svelte.dev/)
+- [Solid](https://www.solidjs.com/)
