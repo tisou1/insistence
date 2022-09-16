@@ -50,3 +50,36 @@ export const regUsername = (str) => {
 
   return regex.test(str)
 }
+
+
+
+//promise封装一个ajax请求
+
+function getData(url, type = 'GET') {
+  let promise = new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest()
+
+    xhr.open(type, url, true)  //异步,默认就为true
+
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState !== 4) return
+      if(xhr.status === 200) {
+        resolve(xhr.response)
+      } else {
+        reject(new Error(xhr.statusText))
+      }
+    }
+
+    xhr.onerror = function () {
+      reject(new Error(xhr.status))
+    }
+
+    //设置响应的数据类型
+    xhr.responseType = 'json'
+    xhr.setRequestHeader('Accept', 'application/json')
+    //发送http请求
+    xhr.send()
+
+  })
+}
+
