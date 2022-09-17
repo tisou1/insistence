@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <form>
+        <fieldset>
+            <input type='button' id='btnopen' value='Open child' onclick='openChild();' />
+            <input type='button' id='btnSendMsg' value='Send Message' onclick='sendMessage();' />
+        </fieldset>
+    </form>
+
+    <button id="btn">存储</button>
+
+    <script>
+        var window1 = 'page1'
+        var childwin;
+        const childname = "popup";
+        function openChild() {
+            childwin = window.open('Page2.html');
+
+        }
+        function sendMessage() {
+            let msg = { pName: "Bob", pAge: "35" };
+            // In production, DO NOT use '*', use toe target domain
+            childwin.postMessage(msg, '*')// childwin is the targetWindow
+            childwin.focus();
+        }
+
+        const btn = document.querySelector('#btn')
+        console.log(btn)
+        btn.addEventListener('click', () => {
+            window.localStorage.setItem('--test--', '测试事件' + Math.random())
+        })
+
+
+    </script>
+</body>
+
+</html>

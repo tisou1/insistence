@@ -7,51 +7,33 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="./promise.js"></script>
+  <button id="btn">点击</button>
   <script >
-    const promise = new MyPromise((resolve, reject) => {
-      console.log('状态改变')
-     setTimeout(() => {
-      resolve(1)
-     })
-   })
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', debounce((e) => {
+      console.log('点击了...',e)
+    }, 1000, true))
 
-   promise.then(value => {
-    console.log(1)
-    console.log('resolve', value)
-})
-promise.then(value => {
-    console.log(2)
-    console.log('resolve', value)
-})
-promise.then(value => {
-    console.log(3)
-    console.log('resolve', value)
-})
-
-
-
-function digitalRoot(n) {
-  // ...
-  //将数字转为字符串
-  let nStr = n.toString().split('')
-  return +sum(nStr)[0]
+ function debounce(fn ,wait, now = false) {
+    let timer = null
+    
+    return function(...args){
+       if(timer) {
+            timer && clearTimeout(timer)
+        	timer = null
+       }
+        //如果要立即执行的话
+        if(now) {
+            fn.call(this, ...args)
+            now = false
+        } else {
+               timer = setTimeout(()=>{
+               fn.call(this, ...args)
+        }, wait)
+        }
+     
+    }
 }
-
-
-function sum(n) {
-  if(n.length > 1) {
-    let r = 0
-    n.forEach(v =>{
-      r += +v
-    })
-  return  sum(r.toString().split(''))
-  } else {
-    return n
-  }
-}
-
-console.log(digitalRoot(7))
   </script>
 </body>
 </html>

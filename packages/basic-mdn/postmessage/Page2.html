@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form>
+    <h1>Recipient of postMessage</h1>
+    <fieldset>
+      <input type='text' id='txtMsg' />
+      <input type='button' id='btnCloseMe' value='Close me' onclick='closeMe();' />
+    </fieldset>
+
+  </form>
+  <script>
+    var window1 = 'page2'
+    console.log(window.window1,'>>>>>')
+    window.addEventListener('message', (event) => {
+      let txt = document.querySelector('#txtMsg')
+      txt.value = `Name is ${event.data.pName} Age is ${event.data.pAge}`
+    })
+
+
+    function closeMe() {
+      try {
+        window.close();
+      } catch (e) { console.log(e) }
+      try {
+        self.close();
+      } catch (e) { console.log(e) }
+    }
+
+    //page进行存储, 这里进行监听.
+    window.addEventListener('storage', (e) => {
+            console.log('有存储事件')
+        })
+  </script>
+
+</body>
+
+</html>
