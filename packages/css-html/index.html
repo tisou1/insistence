@@ -8,35 +8,48 @@
   <style>
     .parent{
       width: 500px;
-      background: #000;
+      height: 600px;
+      background-color: beige;
+      position: relative;
     }
-    .parent::after{
-      display: block;
-      content: '';
-      clear: both;
-    }
-    
     .child{
-      width: 200px;
-      height: 200px;
+      color: red;
+      font-size: 10px;
+      background: black;
+      width: 100px;
+      height: 100px;
+
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -50px 0 0 -50px;
     }
-    .left{
-      float: left;
-      background-color: red;
-    }
-    .right{
-      float: right;
-      background-color: gold;
+    .line{
+      width: 1000px;
+      height: 0px;
+      border-top: 1px red solid;
     }
   </style>
+  <style>
+    @import url(index2.css);
+  </style>
+  <link rel="stylesheet" href="./index.css">
+
 </head>
 <body>
   <main class="parent">
-    <div class="child left" >1</div>
-    <div class="child right" >1</div>
+    <div class="child left" >122222222222222</div>
+
+    <div class="line"></div>
   </main>
   <script>
-    
+      const funcBody = `console.log('name is:'+ n, 'age is:' + a)`
+      let [name, age] = ['siry', 22]
+      const getName = new Function('n', 'a', funcBody)
+      getName(name, age)
+      console.log(getName)
   </script>
+
 </body>
 </html>
