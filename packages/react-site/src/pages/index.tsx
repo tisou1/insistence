@@ -20,7 +20,10 @@ const ADVANCED_LINKS = [
   { to:'/advanced/errorBoundaries', title: 'ErrorBoundaries'},
   { to:'/advanced/refs', title: 'refs'},
   { to:'/advanced/hoc', title: 'hoc'},
+]
 
+const HOOKS_LINKS = [
+  { to:'/hooks/effect', title: 'useEffect'},
 ]
 
 const GRAPHQL_LINKS = [
@@ -56,6 +59,15 @@ function Index() {
             ))
          }
         </WrapContainer>
+
+        <WrapContainer title='Hooks'>
+         {
+            HOOKS_LINKS.map(({ to, title }) => (
+              <Link key={to} to={to} className='btn underline-transparent'>{title}</Link>
+            ))
+         }
+        </WrapContainer>
+
 
         <WrapContainer title='explore(探索)'>
          {
