@@ -49,6 +49,38 @@
       const getName = new Function('n', 'a', funcBody)
       getName(name, age)
       console.log(getName)
+
+
+
+      console.log('1')
+
+      setTimeout(() => {
+        console.log(2)
+      },0)
+
+      new Promise(resolve => {
+        console.log(3)
+
+          setTimeout(() => {
+          console.log('22')
+          new Promise(resolve => {
+            console.log('first')
+            resolve(66)
+          }).then(res => {
+            console.log(res)
+          })
+        },0)
+        
+        setTimeout(() => {
+          console.log('33')
+        },0)
+        resolve(4)
+      }).then(res => {
+        console.log(res)
+        return 5
+      }).then(res => {
+        console.log(res)
+      })
   </script>
 
 </body>
