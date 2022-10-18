@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .imgUnitContainer {
+      height: 300px;
+      /* 固定一个高度 */
+      width: 500px;
+      /* 固定一个宽度 */
+      overflow: hidden;
+      /* 图片超出容器则隐藏 */
+      border: 1px solid #eee;
+      /* 边框 */
+      margin: 10px;
+      /* 外边距 */
+      display: flex;
+      /* 弹性布局 此处主要目的为使图片居中 */
+      align-items: center;
+      /* 垂直居中 */
+      justify-content: center;
+      /* 水平居中 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    const imageList = [] //img 列表
+    ;(function(){
+      console.log('...')
+      //初始化加载
+      const imageUrlArr = Array(20).fill('https://www.dmoe.cc/random.php')
+      const innerContainer = document.createElement('div')
+
+      imageUrlArr.forEach(v => {
+        let imgUnitContainer = document.createElement('div')
+        imgUnitContainer.className = 'imgUnitContainer'
+        let img = new Image() //创建img对象
+        img.setAttribute('data-src', v)//src存储在data属性上
+        img.setAttribute('loaded', 'no') //突变未加载
+        imageList.push(img)
+        imgUnitContainer.appendChild(img)
+        innerContainer.appendChild(imgUnitContainer)
+      })
+
+      document.getElementById('app').append(innerContainer)
+    })()
+
+
+    function lazyLoad() {
+      let height = window.innerHeight //可视区域大小
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+
+      imageList.forEach(v => {
+        console.log(height ,scrollTop, v.offsetTop)
+        if (v.getAttribute('loaded') === 'yes') return //已经加载过了
+        //返回当前元素相对于offsetParent 节点顶部边界的偏移像素值
+        if ((height + scrollTop) > v.offsetTop) {
+          //已经出现在可视区域内
+          v.setAttribute('loaded', 'yes')
+          let temp = new Image() //new一个缓存节点,主要是实现隐式加载
+          temp.setAttribute('src', v.getAttribute('data-src'))
+          temp.onload = () => {
+            v.src = v.getAttribute('data-src')
+          }
+        }
+      })
+    }
+
+    window.onscroll = function () { // 浏览器滚动事件
+      lazyLoad();
+    }
+
+    window.onload = function () { // 文档加载完成事件
+      lazyLoad();
+    }
+
+
+  </script>
+</body>
+
+</html>
