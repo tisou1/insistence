@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Js瀑布流布局</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+  <style type="text/css">
+    #container {
+      position: relative;
+      /* 父容器relative */
+    }
+
+    .item {
+      position: absolute;
+      /* 成员设置为absolute */
+      display: flex;
+      /* 主要为显示字居中 */
+      justify-content: center;
+      /* 水平居中 */
+      align-items: center;
+      /* 垂直居中 */
+      color: #fff;
+      /* 字体颜色白色 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+</body>
+<script>
+  const COLUMN = 3  //三列
+  let counter = 0 // 计数器
+  const columnHeight = Array(COLUMN).fill(0)  //记录每列高度
+  const container = document.querySelector('#container')  //获得容器dom
+  const colorList = ["#EAA78C", "#F9CD82", "#9ADEAD", "#9CB6E9", "#E49D9B", "#97D7D7", "#ABA0CA", "#9F8BEC", "#ACA4D5", "#6495ED", "#7BCDA5", "#76B4EF", "#E1C38F", "#F6C46A", "#B19ED1", "#F09B98", "#87CECB", "#D1A495", "#89D196", "#FE9E9F", "#93BAFF", "#D999F9", "#81C784", "#FFCA62", "#FFA477"]; // 颜色列表
+
+  function getRandomNum(min = 0, max = 1) {
+    return min + ~~(Math.random() * (max - min)) // min~max
+  }
+  //找到高度最小的列
+  function findMinColumn(arr) {
+    let min = arr[0]
+    let index = 0
+    arr.forEach((v, idx) => {
+      if (v < min) {
+        min = v
+        index = idx
+      }
+    })
+
+    return [index, min]
+  }
+
+  function appendImg(num = 12) {
+    //num为每次添加的数量
+    const gap = 3 //这只间隙
+    for (let i = 0; i < num; i++) {
+      //每一个方块的属性
+      let unit = {
+        height: getRandomNum(100, 500),
+        width: 300, //定宽
+        color: colorList[getRandomNum(0, colorList.length)]//随机颜色
+      }
+      let [minIndex, min] = findMinColumn(columnHeight)  //获取高度最小的列  min即为当前列的高度值
+
+      const div = document.createElement('div')  //创建节点
+      div.className = 'item'
+      div.style.backgroundColor = unit.color
+      div.style.height = `${unit.height}px`; // 设置宽度
+      div.style.width = `${unit.width}px`; // 设置宽度
+      div.style.left = `${(300 + gap) * minIndex}px`
+      div.style.top = `${min + gap}px`
+      div.textContent = `${++counter}#${unit.height}X${unit.width}`; // 设置文字
+
+      columnHeight[minIndex] += (unit.height + gap)  //更新选中列的高度
+      container.appendChild(div) //添加节点
+    }
+
+  }
+
+  //整个页面及所有依赖资源如样式表和图片都已完成加载时触发。
+  window.addEventListener('load', () => {
+    init()
+  })
+
+  function init() {
+    appendImg()
+    var endLoad = columnHeight.some(v => v > window.innerHeight); // 获取是否有某列高度大于屏幕高度
+    if (!endLoad) init(); // 如果没有则递归调用继续加载
+  }
+
+
+  //滚动加载
+  window.addEventListener('scroll', () => {
+    let marginBottom = 0
+    if (document.documentElement.scrollTop) {
+      let scrollHeight = document.documentElement.scrollHeight  //元素总的高度
+      let scrollTop = document.documentElement.scrollTop + document.body.scrollTop  //滚动的距离
+      let clientHeight = document.documentElement.clientHeight  //元素可见内容高度
+      marginBottom = scrollHeight - scrollTop - clientHeight;
+    } else {
+      let scrollHeight = document.body.scrollHeight;
+      let scrollTop = document.body.scrollTop;
+      let clientHeight = document.body.clientHeight;
+      marginBottom = scrollHeight - scrollTop - clientHeight;
+    }
+
+    //滚动条距底部小于50px时,加载
+    if(marginBottom <= 50) {
+      appendImg()
+    }
+  })
+
+
+
+</script>
+
+</html>

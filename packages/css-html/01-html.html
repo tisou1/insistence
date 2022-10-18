@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    #t1 {
+      width: 500px;
+    }
+
+    #t2 {
+      max-height: 300px;
+    }
+
+    #t3-container {
+      width: 500px;
+      height: 400px;
+      border: 1px solid #eee;
+      display: flex;
+      justify-content: center;
+    }
+
+    #t3{
+      max-width: 100%;
+        max-height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <!-- 仅设置图片的width或者heigh就可以使得另一边自适应,实现等比例缩放 -->
+    <img id="t1" src="http://www.sdust.edu.cn/__local/9/7A/B1/F29B84DEF72DD329997E8172ABA_664BA3EF_32466.jpg">
+    <!-- 设置最大宽度或者最大高度,实现自适应 -->
+    <img id="t2" src="http://www.sdust.edu.cn/__local/B/F3/E4/693AB931C9FFB84646970D53BFE_C506394A_4282CA.jpg">
+
+    <!-- 再容器中等比盛满 -->
+    <div id="t3-container">
+      <img id="ts" src="https://api.isoyu.com/bing_images.php">
+    </div>
+  </section>
+
+</body>
+
+</html>
