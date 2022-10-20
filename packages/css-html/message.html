@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message</title>
+    <style type="text/css">
+      @keyframes enter {
+        /* 入场的动画 */
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+        .msg-unit{ /* 横幅容器 */
+            font-size: 13px;
+            position: fixed;
+            left: calc(50% - 150px);
+            width: 300px;
+            padding: 10px;
+            border-radius: 3px;
+            animation: enter 0.3s;
+            transition: all .5s;
+            display: flex;
+            align-items: center;
+        }
+        .msg-hide{ /* 隐藏时动画 */
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        .msg-unit > .msg-icon{ /* 图标 */
+            font-size: 15px;
+            margin: 0 7px;
+        }
+    </style>
+    <!-- 引用图标库 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <button onclick="msg('这是一条info', 'info')">Info</button>
+    <button onclick="msg('这是一条success', 'success')">Success</button>
+    <button onclick="msg('这是一条warning', 'warning')">Warning</button>
+    <button onclick="msg('这是一条error', 'error')">Error</button>
+</body>
+<script type="text/javascript">
+   let msgList = []  //消息队列
+   const baseTop = 15 //基础距顶部距离
+   const multiplyTop = 46 //基础高度
+   const msgTypeMap = { // 类型
+            "info": {background: "#EBEEF5", border: "#EBEEF5", color: "#909399", icon: "fa fa-info-circle"},
+            "success": {background: "#f0f9eb", border: "#e1f3d8", color: "#67C23A", icon: " fa fa-check-circle-o"},
+            "warning": {background: "#fdf6ec", border: "#faecd8", color: "#E6A23C", icon: " fa fa-exclamation-circle"},
+            "error": {background: "#fef0f0", border: "#fde2e2", color: "#F56C6C", icon: "fa fa-times-circle-o"},
+        }
+
+    function createMsg(msg, type) {
+      const unit = document.createElement('div')
+      unit.classList.add('msg-unit')
+      const typeInfo = msgTypeMap[type] ? msgTypeMap[type] : msgTypeMap['info']
+      unit.style.background = typeInfo.background
+      unit.style.color = typeInfo.color
+      unit.style['border'] = `1px solid ${typeInfo.border}`
+      //设置图标
+      const i = document.createElement('i')
+      i.className = `${typeInfo.icon} msg-icon`
+      //文字容器
+      const span = document.createElement('span')
+      span.textContent = msg
+      unit.append(i,span) //添加进容器
+      unit.style.top = msgList.length * multiplyTop + baseTop + 'px'//距顶部距离
+      return unit
+    }
+
+    const computedTop = () => msgList.forEach((v,i) => v.style.top = i * multiplyTop + baseTop + 'px')
+
+    const show = (msg, type, duration = 3000) => {
+      const unit = createMsg(msg, type)//创建元素
+      msgList.push(unit)
+      document.body.appendChild(unit) //添加进dom中
+
+      //定时清除
+      setTimeout(() => {
+        console.log(msgList.length)
+        msgList.shift(unit) //出队
+        computedTop() //重新计算高度
+        const finish = () => {
+          document.body.removeChild(unit)
+          unit.removeEventListener('transitionend', finish)
+        }
+
+        unit.addEventListener('transitionend', finish)
+        unit.classList.add('msg-hide') //触发消失动画
+      }, duration)
+    }
+
+    window.msg = (msg, type = 'info') => show(msg, type)
+</script>
+</html>

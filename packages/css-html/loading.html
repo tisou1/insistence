@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>loading</title>
-    <style type="text/css">
-        #__loading__{ /* 设置遮罩层 */
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -10000;
-            opacity: 0;
-            visibility: hidden;
-            background-color: rgba(255, 255, 255, .9);
-            transition: all .5s;
-        }
+  <title>loading</title>
+  <style type="text/css">
+    #__loading__ {
+      /* 设置遮罩层 */
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -10000;
+      opacity: 0;
+      visibility: hidden;
+      background-color: rgba(255, 255, 255, .9);
+      transition: all .5s;
+    }
 
-        #__loading__ > .__container__{ /* 内部容器 居中SVG */
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    #__loading__>.__container__ {
+      /* 内部容器 居中SVG */
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .__show__{ /* 显示 */
-            opacity: 1 !important;
-            z-index: 10000 !important;
-            visibility: visible !important;
-            transition: all .5s !important;
-        }
+    .__show__ {
+      /* 显示 */
+      opacity: 1 !important;
+      z-index: 10000 !important;
+      visibility: visible !important;
+      transition: all .5s !important;
+    }
 
-        button{
-            cursor: pointer;
-        }
-    </style>
+    button {
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
-    <button onclick="show()" >Loading</button>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
-    <div>文字仅作为测试遮罩效果用</div>
+  <button onclick="show()">Loading</button>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
+  <div>文字仅作为测试遮罩效果用</div>
 </body>
 <script>
-    class Loading{
-        constructor(){
-            let uniqueID = "__loading__"; // __开头防止ID冲突
-            const exist = document.querySelector("#" + this.uniqueID); // 判断是否已初始化存在DOM结构
-            if(exist){
-                this.instance = exist; // 存在则实例直接赋予
-            }else{
-                let instance = document.createElement("div"); // 创建实例
-                instance.id = uniqueID;
-                instance.innerHTML = `
+  class Loading {
+    constructor() {
+      let uniqueID = "__loading__"; // __开头防止ID冲突
+      const exist = document.querySelector("#" + this.uniqueID); // 判断是否已初始化存在DOM结构
+      if (exist) {
+        this.instance = exist; // 存在则实例直接赋予
+      } else {
+        let instance = document.createElement("div"); // 创建实例
+        instance.id = uniqueID;
+        instance.innerHTML = `
                     <div class="__container__">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37px" height="37px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve">
                             <path fill="#4C98F7" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z" transform="rotate(275.098 25 25)">
@@ -76,27 +81,27 @@
                         </svg>
                     </div>
                 `.replace(/[\s]+/g, " ");
-                this.instance = instance; // 对象赋值实例
-                document.body.appendChild(this.instance); // body下添加实例
-            }
-        }
-        start(){
-            this.instance.classList.add("__show__"); // 显示
-        }   
-        stop(){
-            this.instance.classList.remove("__show__"); // 隐藏
-        }
+        this.instance = instance; // 对象赋值实例
+        document.body.appendChild(this.instance); // body下添加实例
+      }
     }
-
-    // 作为模块则直接导出实例
-    // export default new Loading();
-
-    const loading = new Loading(); 
-
-    function show() {
-        loading.start();
-        setTimeout(() => loading.stop(), 1000);
+    start() {
+      this.instance.classList.add("__show__"); // 显示
     }
+    stop() {
+      this.instance.classList.remove("__show__"); // 隐藏
+    }
+  }
+
+  // 作为模块则直接导出实例
+  // export default new Loading();
+
+  const loading = new Loading();
+
+  function show() {
+    loading.start();
+    setTimeout(() => loading.stop(), 1000);
+  }
 </script>
 
 </html>
