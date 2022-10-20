@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>滑动拼图验证码</title>
+  <link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_1582902_u0zm91pv15i.css">
+  <style type="text/css">
+    .verify-slide-con {
+      /* 滑动拼图容器块 */
+      width: 360px;
+      padding: 10px 20px;
+      border: 1px solid #eee;
+    }
+
+    .img-con {
+      /* 图片容器块 */
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid #eee;
+      position: relative;
+    }
+
+    .img-con>.slide-block {
+      /* 图片区域的滑块 */
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      display: none;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-size: 360px 200px;
+      z-index: 10;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4), 0 0 10px 0 rgba(90, 90, 90, 0.4);
+    }
+
+    .img-con>.slide-block-mask {
+      /* 图片区域的空缺区域 */
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .img-con>.img {
+      /* 图片 */
+      width: 100%;
+      height: 100%;
+    }
+
+    .img-con>.loading {
+      /* 加载中样式 */
+      width: unset;
+      height: unset;
+    }
+
+    .slide-con {
+      /* 滑块容器 */
+      height: 40px;
+      margin: 10px 0;
+      position: relative;
+      border: 1px solid #eee;
+    }
+
+    .slide-con>.slide-btn {
+      /* 滑动按钮 */
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      background: #4C98F7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .icon-arrow-right {
+      /* 右箭头 */
+      font-size: 30px;
+      color: #fff;
+    }
+
+    .operate-con {
+      /* 操作容器块 */
+      border-top: 1px solid #eee;
+      height: 30px;
+      padding: 5px 0 0 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon-shuaxin1 {
+      /* 刷新按钮 */
+      color: #777;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="verify-slide-con">
+    <!-- 滑动拼图容器块 -->
+    <div class="img-con">
+      <!-- 图片容器块 -->
+      <img class="img"> <!-- 图片 -->
+      <div class="slide-block"></div> <!-- 拼图 -->
+      <div class="slide-block-mask"></div> <!-- 缺口 -->
+    </div>
+    <div class="slide-con">
+      <!-- 滑块容器 -->
+      <div class="slide-btn">
+        <!-- 滑动按钮 -->
+        <i class="iconfont icon-arrow-right"></i> <!-- 图标 -->
+      </div>
+    </div>
+    <div class="operate-con">
+      <!-- 操作容器块 -->
+      <i id="refresh" class="iconfont icon-shuaxin1"></i> <!-- 刷新按钮 -->
+    </div>
+
+    <img alt="" id="target">
+  </div>
+</body>
+<script type="text/javascript">
+  (function () {
+    //https://cdn.seovx.com/?mom=302
+    let imgCon = document.querySelector(".img-con"); // 图片容器元素引用
+    let img = document.querySelector(".img-con > .img"); // 图片元素引用
+    let slideBlock = document.querySelector(".img-con > .slide-block"); // 滑块元素引用
+    let slideBlockMask = document.querySelector(".img-con > .slide-block-mask"); // 缺口元素引用
+    let slideCon = document.querySelector(".slide-con"); // 滑动容器引用
+    let slideBtn = document.querySelector(".slide-con > .slide-btn"); // 滑块按钮引用
+    let refreshBtn = document.querySelector("#refresh"); // 刷新按钮引用
+
+    let targetImg = document.querySelector('#target')
+
+    function initSlider() {
+      let maxTop = imgCon.offsetHeight - window.getComputedStyle(slideBlock).height.replace('px', '')
+      // let maxTop = imgCon.offsetHeight - slideBlock.getBoundingClientRect().height
+      let maxRight = imgCon.offsetWidth - ~~window.getComputedStyle(slideBlock).getPropertyValue('width').replace('px', '')
+
+
+      let randPosY = randomInt(0, maxTop) //随件Y偏移量
+      let randPosX = randomInt(0, maxRight) //随件Y偏移量
+
+      //拖动的滑块,鼠标按下事件
+      slideBtn.addEventListener('mousedown', (e) => {
+        let timeStart = Date.now()
+        slideBlock.style.display = 'block' //显示拼图
+        slideBlock.style.top = `${randPosY}px` //Y轴的偏移  
+        slideBlock.style['background-position'] = `-${randPosX}px - ${randPosY}px`//制定背景图的位置 
+        slideBlockMask.setAttribute("style", `display:block;top:${randPosY}px;left:${randPosX}px`); // 显示缺口并指定位置
+        let degeX = e.clientX //鼠标点击位置
+
+        function mouseHandle(event) {
+          let relativeX = event.clientX - degeX  //鼠标移动距离
+          if (relativeX < 0 || relativeX > imgCon.offsetWidth - slideBtn.offsetWidth) {
+            return 0 //判断是否超出滑动容器快,超出则不移动
+          }
+          console.log(relativeX)
+          slideBlock.style.left = relativeX + 'px' //移动滑块
+          slideBtn.style.left = relativeX + 'px' //移动滑块按钮
+        }
+        function mouseupHandle() {
+          document.removeEventListener('mousemove', mouseHandle)
+          document.removeEventListener('mouseup', mouseupHandle)
+          let timeEnd = Date.now()
+
+          if (Math.abs(slideBlock.offsetLeft - slideBlockMask.offsetLeft) <= 5) {
+            alert('验证成功,用时:' + ((timeEnd - timeStart) / 1000).toFixed(1) + '秒')
+          }
+          else {  
+            alert('验证失败')
+          }
+
+          slideBlock.style.left = 0 //拼图归位
+          slideBtn.style.left = 0// 滑块归位
+        }
+        //鼠标移动事件
+        document.addEventListener('mousemove', mouseHandle)
+
+        //鼠标左键松开事件
+        document.addEventListener('mouseup', mouseupHandle)
+      })
+
+    }
+
+    img.src = './image/facebook.jpeg'
+
+    // let img1 = new Image()
+    // img1.src = 'https://cdn.seovx.com/img/seovx-20-10%20(64).jpg'
+    // img1.onload =  function onImgLoaded() {
+    //   img.setAttribute("crossOrigin",'Anonymous')
+    //   //call the methods that will create a 64-bit version of thumbnail here.
+    //   let newImg = getImagePortion(img, 120, 150, 80, 50, 2);
+    //   //place image in appropriate div
+    //   console.log(newImg)
+    //   targetImg.src = newImg
+
+    //   // document.getElementById("images").innerHTML = "<img alt="" src=""+newImg+"" />";
+    // }
+
+   
+
+    initSlider()
+
+  })()
+
+
+
+  function randomInt(min = 0, max = 1) {
+    return min + Math.floor(Math.random() * (max - min))
+  }
+</script>
+
+</html>
