@@ -9,6 +9,7 @@ import TodoListVue from './components/TodoList.vue';
   <img alt="Vue logo" src="./assets/logo.png" />
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <TodoListVue />
+  <div class="run">运行成功</div>
 </template>
 
 <style>
@@ -20,4 +21,17 @@ import TodoListVue from './components/TodoList.vue';
   color: #2c3e50;
   margin-top: 60px;
 }
+
+  .run::before{
+    content: "";
+    display: inline-block;
+    box-sizing: content-box;
+    background-color: #7863FB;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    border: 3px solid rgba(104, 99, 251, 0.2);
+    margin-right:8px
+  }
 </style>
