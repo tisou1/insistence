@@ -3,7 +3,7 @@
 ### 基础知识
 - css, js, html
 - [手写](packages/handWritting)
-- [算法]("packages/Algorithm")
+- [算法](packages/Algorithm)
 
 ### todo list
 - [React](https://reactjs.org/)
