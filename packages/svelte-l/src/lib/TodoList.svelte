@@ -18,7 +18,7 @@ const onChange = (value: any) => {
 }
 const  onDelete = (idx: number) => {
   list.splice(idx, 1)
-  list = list
+  // list = list // v5版本之后不需要重新赋值 使用splice就可以触发更新
 }
 
 $effect(() => {
